@@ -914,16 +914,17 @@ body {
     height: 14px;
   }
 
-  /* Card Background Artworks */
+  /* Card 1 & Card 2 Background Artworks: Increased opacity for clear visibility in Light Mode */
   .card-mesob-art,
   .card-skyline-art {
-    right: 38px;
-    opacity: 0.22;
+    right: 42px;
+    opacity: 0.85;
   }
 
   /* In light mode on mobile, keep Android Play emblem & iOS App Store badge bright white like desktop */
+  /* Pushed to the left (right: 58px) with clean spacing away from the right arrow icon */
   .play-watermark {
-    right: 48px;
+    right: 58px;
     opacity: 0.92;
   }
 
@@ -932,7 +933,7 @@ body {
   }
 
   .appstore-watermark {
-    right: 48px;
+    right: 58px;
     opacity: 0.95;
   }
 
@@ -1071,6 +1072,11 @@ body {
 
   .social-footer {
     margin-bottom: 14px;
+  }
+
+  .play-watermark,
+  .appstore-watermark {
+    right: 52px;
   }
 }
 
