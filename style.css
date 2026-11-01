@@ -803,7 +803,7 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
 
   /* Responsive Brand Header */
@@ -823,10 +823,10 @@ body {
     margin-top: 8px;
   }
 
-  /* Hero Section: Positioned parallel to the city baseline without pushing buttons below */
+  /* Hero Section: Positioned parallel to the city baseline */
   .hero-section {
     margin-top: clamp(48px, 8.5vh, 64px);
-    margin-bottom: 8px;
+    margin-bottom: 0;
   }
 
   .sub-heading {
@@ -850,14 +850,14 @@ body {
     font-size: 8px;
   }
 
-  /* Pill Link Cards: Compact vertical spacing so buttons are never pushed down */
+  /* Pill Link Cards: Moved up closer to the text with a tight gap */
   .links-section {
-    flex: 1;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: clamp(9px, 1.4vh, 12px);
-    margin-bottom: clamp(10px, 1.8vh, 16px);
+    margin-top: clamp(8px, 1.5vh, 12px);
+    margin-bottom: auto;
   }
 
   .link-card {
@@ -965,7 +965,7 @@ body {
 
   .hero-section {
     margin-top: 40px;
-    margin-bottom: 6px;
+    margin-bottom: 0;
   }
 
   .sub-heading {
@@ -984,7 +984,8 @@ body {
 
   .links-section {
     gap: 7px;
-    margin-bottom: 8px;
+    margin-top: 6px;
+    margin-bottom: auto;
   }
 
   .link-card {
