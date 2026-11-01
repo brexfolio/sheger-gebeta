@@ -823,10 +823,10 @@ body {
     margin-top: 8px;
   }
 
-  /* Hero Section (Pushed down with comfortable spacing on mobile) */
+  /* Hero Section: Positioned parallel to the city baseline without pushing buttons below */
   .hero-section {
-    margin-top: clamp(18px, 3.2vh, 28px);
-    margin-bottom: clamp(12px, 2.4vh, 20px);
+    margin-top: clamp(48px, 8.5vh, 64px);
+    margin-bottom: 8px;
   }
 
   .sub-heading {
@@ -836,7 +836,7 @@ body {
 
   .main-heading {
     font-size: 24px;
-    margin: 3px 0 8px 0;
+    margin: 2px 0 5px 0;
     line-height: 1.15;
     letter-spacing: -0.02em;
   }
@@ -850,14 +850,14 @@ body {
     font-size: 8px;
   }
 
-  /* Pill Link Cards: Proportional height and spacing */
+  /* Pill Link Cards: Compact vertical spacing so buttons are never pushed down */
   .links-section {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: clamp(10px, 1.8vh, 15px);
-    margin-bottom: clamp(12px, 2.5vh, 22px);
+    gap: clamp(9px, 1.4vh, 12px);
+    margin-bottom: clamp(10px, 1.8vh, 16px);
   }
 
   .link-card {
@@ -964,8 +964,8 @@ body {
   }
 
   .hero-section {
-    margin-top: 14px;
-    margin-bottom: 12px;
+    margin-top: 40px;
+    margin-bottom: 6px;
   }
 
   .sub-heading {
@@ -974,7 +974,7 @@ body {
 
   .main-heading {
     font-size: 21px;
-    margin: 2px 0 6px 0;
+    margin: 1px 0 4px 0;
   }
 
   .pill-categories {
@@ -983,8 +983,8 @@ body {
   }
 
   .links-section {
-    gap: 8px;
-    margin-bottom: 10px;
+    gap: 7px;
+    margin-bottom: 8px;
   }
 
   .link-card {
