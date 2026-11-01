@@ -1,0 +1,1078 @@
+/* ==========================================================================
+   Sheger Gebeta - Link Landing Page
+   Exact replica of the provided mobile design
+   ========================================================================== */
+
+:root {
+  /* Color Palette */
+  --bg-page: #f0ebe4;
+  --card-bg-start: #F8F4EC;
+  --card-bg-mid: #faf3eb;
+  --card-bg-end: #f4eae0;
+  
+  --primary-maroon: #8F0F0D;
+  --primary-dark-maroon: #681211;
+  --text-tagline: #87251e;
+  --text-sub: #7d2621;
+  --text-desc: #873832;
+  
+  --pill-bg-start: #ecc7bf;
+  --pill-bg-mid: #e3aea4;
+  --pill-bg-end: #dda79e;
+  --pill-border: rgba(255, 255, 255, 0.65);
+  --pill-shadow: 0 8px 20px -3px rgba(125, 40, 30, 0.14);
+  
+  --arrow-border: #8F0F0D;
+  --sun-gold: #f5cf7b;
+  --skyline-warm: #cca095;
+  --pattern-stroke: #d8c2b4;
+  
+  /* Fonts */
+  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Reset & Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-page);
+  background-image: radial-gradient(circle at 50% 20%, #f7f3ec 0%, #ebe5dc 100%);
+  color: var(--primary-maroon);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px 36px 16px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, background-image 0.4s ease, color 0.4s ease;
+}
+
+/* Outer Page Container */
+.page-container {
+  width: 100%;
+  max-width: 530px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Mobile Application Card */
+.card-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 490px;
+  background: linear-gradient(180deg, var(--card-bg-start) 0%, var(--card-bg-mid) 48%, var(--card-bg-end) 100%);
+  border-radius: 16px;
+  box-shadow: 
+    0 25px 60px -15px rgba(110, 40, 25, 0.16),
+    0 4px 18px rgba(0, 0, 0, 0.04),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(225, 205, 195, 0.45);
+  overflow: hidden;
+  padding: 24px 22px 30px 22px;
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* --------------------------------------------------------------------------
+   Top-Left Ethiopian Food Platter Corner
+   -------------------------------------------------------------------------- */
+.food-plate-corner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 125px;
+  height: 144px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.food-plate-corner img,
+.food-plate-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: top left;
+}
+
+.food-plate-dark {
+  display: none !important;
+}
+
+[data-theme="dark"] .food-plate-light {
+  display: none !important;
+}
+
+[data-theme="dark"] .food-plate-dark {
+  display: block !important;
+}
+
+/* --------------------------------------------------------------------------
+   Top-Right Skyline, Sun & Landmark Art
+   -------------------------------------------------------------------------- */
+.skyline-art {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 220px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* --------------------------------------------------------------------------
+   Interactive Celestial Theme Toggle (Sun ⇄ Moon)
+   -------------------------------------------------------------------------- */
+.celestial-theme-toggle {
+  position: absolute;
+  top: 30px;
+  right: 43px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  user-select: none;
+  outline: none;
+  padding: 0;
+}
+
+.celestial-theme-toggle svg {
+  pointer-events: none;
+}
+
+.celestial-theme-toggle:hover {
+  transform: scale(1.15);
+  background: rgba(143, 15, 13, 0.08);
+  border-color: rgba(143, 15, 13, 0.2);
+  box-shadow: 0 0 16px rgba(143, 15, 13, 0.2);
+}
+
+.celestial-theme-toggle:active {
+  transform: scale(0.92) rotate(25deg);
+}
+
+.celestial-theme-toggle:focus-visible {
+  border-color: var(--primary-maroon);
+  box-shadow: 0 0 0 3px rgba(143, 15, 13, 0.25);
+}
+
+/* Sparkle Sun & Crescent Moon inside Toggle */
+.sun-sparkle {
+  display: block;
+  animation: gentlePulse 4s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 6px rgba(122, 18, 22, 0.25));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.moon-crescent {
+  display: none;
+  animation: gentlePulse 4s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 8px rgba(232, 142, 139, 0.6));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+
+
+/* Flying Birds */
+.flying-bird-1 {
+  position: absolute;
+  top: 108px;
+  right: 114px;
+  opacity: 0.9;
+}
+
+.flying-bird-2 {
+  position: absolute;
+  top: 132px;
+  right: 96px;
+  opacity: 0.9;
+}
+
+/* Monument & Cityscape Silhouettes - Baseline parallel to "Your Gateway to" */
+.city-skyline,
+.monument-skyline {
+  position: absolute;
+  top: 30px;
+  overflow: visible;
+  right: 0;
+  width: 159px;
+  height: 160px;
+}
+
+/* Smooth left-edge fade mask so the cityscape melts seamlessly into any card background */
+.city-buildings-group {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 22%, rgba(0, 0, 0, 0.45) 38%, #000000 55%);
+  mask-image: linear-gradient(to right, transparent 0%, transparent 22%, rgba(0, 0, 0, 0.45) 38%, #000000 55%);
+}
+
+.skyline-fade-rect {
+  display: none !important;
+}
+
+.skyline-moon-halo {
+  display: none;
+}
+
+@keyframes gentlePulse {
+  0% { transform: scale(0.96) rotate(0deg); opacity: 0.85; }
+  100% { transform: scale(1.05) rotate(6deg); opacity: 1; }
+}
+
+/* --------------------------------------------------------------------------
+   Content Wrapper
+   -------------------------------------------------------------------------- */
+.content-wrapper {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   Brand Header
+   -------------------------------------------------------------------------- */
+.brand-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32px;
+  text-align: center;
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sheger-brand-logo {
+  height: 46px;
+  width: auto;
+  max-width: 165px;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 5px rgba(120, 24, 22, 0.12));
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sheger-brand-logo:hover {
+  transform: scale(1.03);
+}
+
+.logo-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 3px 6px rgba(120, 24, 22, 0.2));
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.logo-mark:hover {
+  transform: rotate(-5deg) scale(1.05);
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 0.9;
+}
+
+.brand-title, .brand-sub {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--primary-maroon);
+  letter-spacing: 0.02em;
+}
+
+.brand-tagline {
+  font-family: var(--font-heading);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--text-tagline);
+  margin-top: 14px;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   Hero Section
+   -------------------------------------------------------------------------- */
+.hero-section {
+  text-align: center;
+  margin-top: 22px;
+  margin-bottom: 22px;
+}
+
+.sub-heading {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-sub);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.main-heading {
+  font-family: var(--font-heading);
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--primary-maroon);
+  margin: 3px 0 10px 0;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.pill-categories {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-tagline);
+  opacity: 0.95;
+}
+
+.pill-categories .dot {
+  font-size: 10px;
+  opacity: 0.75;
+}
+
+/* --------------------------------------------------------------------------
+   Links Section (Pill Action Cards)
+   -------------------------------------------------------------------------- */
+.links-section {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin-bottom: 24px;
+}
+
+.link-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 8px 14px 8px 10px;
+  border-radius: 9999px; /* Pill shape */
+  text-decoration: none;
+  background-color: #8F0F0D;
+  background-image: linear-gradient(180deg, #9b1311 0%, #8F0F0D 50%, #830c0a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 
+    0 8px 20px -3px rgba(143, 15, 13, 0.38),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.24s ease, border-color 0.24s ease, background 0.24s ease;
+  cursor: pointer;
+}
+
+.link-card:hover {
+  transform: translateY(-2.5px);
+  background-image: linear-gradient(180deg, #aa1715 0%, #991210 50%, #8c0f0d 100%);
+  box-shadow: 
+    0 12px 26px -3px rgba(143, 15, 13, 0.48),
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.link-card:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(143, 15, 13, 0.28);
+}
+
+/* Left Icon Container Badge */
+.card-left-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 
+    0 3px 10px rgba(115, 30, 25, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.04);
+  position: relative;
+  z-index: 3;
+  transition: transform 0.25s ease;
+}
+
+.link-card:hover .card-left-icon {
+  transform: scale(1.06);
+}
+
+.card-left-icon svg {
+  display: block;
+  max-width: 28px;
+  max-height: 30px;
+  object-fit: contain;
+}
+
+/* Cafe Storefront Icon Display Rules: Light Mode vs Dark Mode */
+.cafe-icon-dark {
+  display: none !important;
+}
+
+.cafe-icon-light {
+  display: block !important;
+}
+
+[data-theme="dark"] .cafe-icon-light {
+  display: none !important;
+}
+
+[data-theme="dark"] .cafe-icon-dark {
+  display: block !important;
+}
+
+/* Card Text Column */
+.card-text {
+  margin-left: 14px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+  flex-grow: 1;
+  position: relative;
+  z-index: 3;
+}
+
+.card-title {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+}
+
+.card-desc {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 2px;
+  line-height: 1.2;
+}
+
+/* Subtle Watermark Art within Cards */
+.card-watermark {
+  position: absolute;
+  right: 64px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 2;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.link-card:hover .card-watermark {
+  transform: translateY(-50%) scale(1.06);
+  opacity: 0.9;
+}
+
+/* Card 1 Mesob Art Watermark */
+.card-mesob-art {
+  position: absolute;
+  right: 46px;
+  bottom: 0;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.card-mesob-art svg {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
+.link-card:hover .card-mesob-art {
+  transform: scale(1.02);
+  opacity: 0.95;
+}
+
+.play-watermark {
+  right: 64px;
+  opacity: 0.92;
+}
+
+.link-card:hover .play-watermark {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.06);
+}
+
+.appstore-watermark {
+  right: 64px;
+  opacity: 0.95;
+}
+
+.link-card:hover .appstore-watermark {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.06);
+}
+
+/* Card Organic Wave Background Art */
+.card-bg-wave {
+  position: absolute;
+  right: 42px;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 78px;
+  pointer-events: none;
+  z-index: 1;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.card-bg-wave svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.link-card:hover .card-bg-wave {
+  transform: scale(1.04);
+  opacity: 0.95;
+}
+
+/* Card 2 Skyline Art Watermark */
+.card-skyline-art {
+  position: absolute;
+  right: 46px;
+  bottom: 0;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.35) 25%, #000000 65%);
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.35) 25%, #000000 65%);
+}
+
+.card-skyline-art svg {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
+.link-card:hover .card-skyline-art {
+  transform: scale(1.02);
+  opacity: 0.95;
+}
+
+/* Right Circle Arrow Button */
+.card-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: #ffffff;
+  color: #8F0F0D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: 8px;
+  position: relative;
+  z-index: 3;
+  transition: all 0.22s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+}
+
+.link-card:hover .card-arrow {
+  transform: translateX(2.5px) scale(1.05);
+  background: #ffffff;
+  color: #8F0F0D;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* --------------------------------------------------------------------------
+   Footer Section (Social Icons)
+   -------------------------------------------------------------------------- */
+.social-footer {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.divider-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.divider-text .line {
+  flex: 1;
+  max-width: 42px;
+  height: 1px;
+  background: #9f4c46;
+  opacity: 0.5;
+}
+
+.divider-text .title {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary-maroon);
+  letter-spacing: 0.02em;
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.social-btn {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--primary-maroon);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(120, 23, 22, 0.25);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.social-btn:hover {
+  transform: translateY(-3px) scale(1.1);
+  background: #962220;
+  box-shadow: 0 6px 14px rgba(120, 23, 22, 0.38);
+}
+
+.social-btn:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* Advanced Floating Tooltip: Rectangle with bottom triangle arrow */
+.social-tooltip {
+  position: absolute;
+  bottom: calc(100% + 9px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: linear-gradient(180deg, #360c0b 0%, #1f0404 100%);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 4px 9px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  box-shadow: 
+    0 6px 14px rgba(30, 4, 4, 0.45),
+    0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.2s ease;
+  z-index: 30;
+}
+
+/* Bottom Triangle Arrow pointing to the social icon */
+.social-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px 5px 0 5px;
+  border-style: solid;
+  border-color: #1f0404 transparent transparent transparent;
+}
+
+.social-btn:hover .social-tooltip,
+.social-btn:focus-visible .social-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   Traditional Ethiopian Geometric Pattern (Bottom Corners)
+   -------------------------------------------------------------------------- */
+.bottom-pattern {
+  position: absolute;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+  display: block;
+  line-height: 0;
+}
+
+.bottom-pattern-left {
+  left: 0;
+  transform: scaleX(-1);
+  transform-origin: center bottom;
+}
+
+.bottom-pattern-right {
+  right: 0;
+}
+
+.bottom-pattern svg {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Adaptations
+   -------------------------------------------------------------------------- */
+@media (max-width: 520px) {
+  body {
+    padding: 0;
+    background: var(--card-bg-start);
+  }
+
+  .card-wrapper {
+    max-width: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    padding: 24px 18px 36px 18px;
+  }
+
+  .main-heading {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 400px) {
+  .food-plate-corner {
+    width: 105px;
+    height: 121px;
+  }
+}
+
+/* ==========================================================================
+   SLEEK ONYX & CRIMSON GLOW - DARK MODE THEME
+   Deep obsidian / charcoal background (#08070A) with frosted glassmorphic
+   cards, vibrant velvet-crimson badges, and luminous red accent glows.
+   ========================================================================== */
+
+[data-theme="dark"] body {
+  background-color: #08070A;
+  background-image: radial-gradient(circle at 50% 25%, #240c0f 0%, #0c090c 60%, #050406 100%);
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .card-wrapper {
+  background-color: #560908;
+  background-image: linear-gradient(180deg, #5e0b0a 0%, #560908 50%, #4c0706 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 30px 80px -15px rgba(0, 0, 0, 0.9),
+    0 0 45px -8px rgba(86, 9, 8, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.16);
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Celestial Theme Toggle in Dark Mode */
+[data-theme="dark"] .celestial-theme-toggle:hover {
+  background: rgba(226, 55, 55, 0.16);
+  border-color: rgba(226, 55, 55, 0.35);
+  box-shadow: 0 0 18px rgba(226, 55, 55, 0.35);
+}
+
+[data-theme="dark"] .celestial-theme-toggle:focus-visible {
+  border-color: #E23737;
+  box-shadow: 0 0 0 3px rgba(226, 55, 55, 0.4);
+}
+
+
+/* Celestial Elements in Dark Mode */
+[data-theme="dark"] .sun-sparkle {
+  display: none !important;
+}
+
+[data-theme="dark"] .moon-crescent {
+  display: block !important;
+  stroke: #E88E8B;
+  filter: drop-shadow(0 0 8px rgba(232, 142, 139, 0.5));
+}
+
+[data-theme="dark"] .flying-bird path {
+  stroke: #E88E8B !important;
+  opacity: 0.8;
+}
+
+[data-theme="dark"] .skyline-moon-halo {
+  display: block;
+}
+
+[data-theme="dark"] .city-skyline {
+  filter: drop-shadow(0 0 10px rgba(226, 55, 55, 0.2));
+}
+
+/* Brand Header & Hero Section in Dark Mode */
+[data-theme="dark"] .sheger-brand-logo {
+  filter: brightness(0) invert(1) drop-shadow(0 0 14px rgba(226, 55, 55, 0.45));
+}
+
+[data-theme="dark"] .brand-tagline {
+  color: #EFA7A5;
+  letter-spacing: 0.12em;
+  opacity: 0.9;
+}
+
+[data-theme="dark"] .sub-heading {
+  color: #DCC0C2;
+}
+
+[data-theme="dark"] .main-heading {
+  color: #FFFFFF;
+  text-shadow: 0 2px 24px rgba(255, 255, 255, 0.18), 0 0 35px rgba(226, 55, 55, 0.22);
+}
+
+[data-theme="dark"] .pill-categories {
+  color: #E29A98;
+}
+
+/* Link Cards: Rich Deep Wine #390605 in Dark Mode matching Reference Design */
+[data-theme="dark"] .link-card {
+  background-color: #390605;
+  background-image: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 8px 24px -4px rgba(0, 0, 0, 0.55),
+    inset 0 1px 1px rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .link-card:hover {
+  background-color: #450807;
+  background-image: none;
+  border-color: rgba(255, 120, 120, 0.4);
+  box-shadow: 
+    0 12px 28px -4px rgba(0, 0, 0, 0.7),
+    0 0 18px rgba(143, 15, 13, 0.3),
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.18);
+  transform: translateY(-2.5px);
+}
+
+/* Left Icon Circular Badges */
+[data-theme="dark"] .card-left-icon {
+  background: linear-gradient(135deg, #7A1214 0%, #480A0B 100%);
+  border: 1.5px solid rgba(255, 120, 120, 0.4);
+  box-shadow: 
+    0 4px 14px rgba(0, 0, 0, 0.55),
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.35);
+}
+
+/* White Icon Pictograms in Dark Mode */
+[data-theme="dark"] .card-left-icon svg path:not([fill="none"]):not([fill="#FFFCF1"]),
+[data-theme="dark"] .card-left-icon svg rect:not([fill="white"]):not([fill="none"]):not([fill="#8F0F0D"]),
+[data-theme="dark"] .card-left-icon svg [fill="#8F0F0D"],
+[data-theme="dark"] .card-left-icon svg [fill="#9B1B20"],
+[data-theme="dark"] .card-left-icon svg [fill="#7A1216"],
+[data-theme="dark"] .card-left-icon svg [fill="#B54835"] {
+  fill: #FFFFFF !important;
+}
+
+[data-theme="dark"] .card-left-icon svg line[stroke="#8F0F0D"],
+[data-theme="dark"] .card-left-icon svg path[stroke="#8F0F0D"] {
+  stroke: #FFFFFF !important;
+}
+
+/* Contrast eyes on Android robot */
+[data-theme="dark"] #card-android .card-left-icon circle {
+  fill: #480A0B !important;
+}
+
+/* Card 2 Cafe Icon in Dark Mode - preserve awning stripes and cafe text */
+[data-theme="dark"] #card-register .card-left-icon svg path[fill="#B54835"] {
+  fill: #B54835 !important;
+}
+[data-theme="dark"] #card-register .card-left-icon svg path[fill="#D6808A"] {
+  fill: #D6808A !important;
+}
+[data-theme="dark"] #card-register .card-left-icon svg path[fill="#7A1216"] {
+  fill: #7A1216 !important;
+}
+[data-theme="dark"] #card-register .card-left-icon svg path[fill="#CE7278"] {
+  fill: #CE7278 !important;
+}
+[data-theme="dark"] #card-register .card-left-icon svg path[stroke="#D86F77"] {
+  stroke: #D86F77 !important;
+}
+
+/* Card Content in Dark Mode */
+[data-theme="dark"] .card-text {
+  border-left: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+[data-theme="dark"] .card-title {
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .card-desc {
+  color: #D5BEC0;
+}
+
+/* Action Arrow Buttons */
+[data-theme="dark"] .card-arrow {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .card-arrow svg {
+  stroke: #FFFFFF;
+}
+
+[data-theme="dark"] .link-card:hover .card-arrow {
+  background: #8F0F0D;
+  border-color: #E23737;
+  box-shadow: 0 0 14px rgba(226, 55, 55, 0.6);
+}
+
+/* Watermarks in Dark Mode */
+[data-theme="dark"] .card-mesob-art {
+  opacity: 0.45;
+}
+
+/* Card 2 City Skyline blended seamlessly with #390605 button background */
+[data-theme="dark"] .card-skyline-art {
+  opacity: 0.75;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.15) 20%, rgba(0, 0, 0, 0.8) 50%, #000000 75%);
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.15) 20%, rgba(0, 0, 0, 0.8) 50%, #000000 75%);
+}
+
+[data-theme="dark"] .card-skyline-fade-rect {
+  display: none !important;
+}
+
+[data-theme="dark"] .card-skyline-art svg g {
+  mix-blend-mode: normal !important;
+}
+
+/* Organic Wave behind app watermarks */
+[data-theme="dark"] .card-bg-wave path {
+  fill: #4B0807 !important;
+  fill-opacity: 0.65 !important;
+}
+
+/* Card 3: Android App - Google Play Watermark matching reference photo colors */
+[data-theme="dark"] .play-watermark {
+  opacity: 1 !important;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+}
+
+[data-theme="dark"] .play-watermark .play-facet-left {
+  fill: #99100E !important;
+}
+
+[data-theme="dark"] .play-watermark .play-facet-top {
+  fill: #D37D84 !important;
+}
+
+[data-theme="dark"] .play-watermark .play-facet-right {
+  fill: #C8624B !important;
+}
+
+[data-theme="dark"] .play-watermark .play-facet-bottom {
+  fill: #BD4B18 !important;
+}
+
+/* Card 4: iOS App - App Store Badge matching reference photo colors */
+[data-theme="dark"] .appstore-watermark {
+  opacity: 1 !important;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+}
+
+[data-theme="dark"] .appstore-watermark .appstore-bg {
+  fill: #8F0F0D !important;
+}
+
+[data-theme="dark"] .appstore-watermark .appstore-stroke {
+  fill: #FFFCF1 !important;
+}
+
+/* Footer Section in Dark Mode */
+[data-theme="dark"] .divider-text .line {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+[data-theme="dark"] .divider-text .title {
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .social-btn {
+  background: #FFFFFF;
+  color: #560908;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .social-btn:hover {
+  background: #FDF4F4;
+  color: #7A0C0B;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="dark"] .social-tooltip {
+  background: #FFFFFF;
+  color: #560908;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .social-tooltip::after {
+  border-color: #FFFFFF transparent transparent transparent;
+}
+
+/* Traditional Bottom Patterns in Dark Mode */
+[data-theme="dark"] .bottom-pattern svg g g {
+  opacity: 0.22;
+}
+
+[data-theme="dark"] .bottom-pattern svg path {
+  stroke: #E23737 !important;
+}
+
+@media (max-width: 520px) {
+  [data-theme="dark"] body {
+    background: #560908;
+  }
+
+  [data-theme="dark"] .card-wrapper {
+    background-color: #560908;
+    background-image: linear-gradient(180deg, #5e0b0a 0%, #560908 50%, #4c0706 100%);
+  }
+}
