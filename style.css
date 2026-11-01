@@ -850,13 +850,13 @@ body {
     font-size: 8px;
   }
 
-  /* Pill Link Cards: Moved up closer to the text with a tight gap */
+  /* Pill Link Cards: Moved up closer to the text with a tight 16px gap */
   .links-section {
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     gap: clamp(9px, 1.4vh, 12px);
-    margin-top: clamp(8px, 1.5vh, 12px);
+    margin-top: 16px;
     margin-bottom: auto;
   }
 
@@ -984,7 +984,7 @@ body {
 
   .links-section {
     gap: 7px;
-    margin-top: 6px;
+    margin-top: 14px;
     margin-bottom: auto;
   }
 
