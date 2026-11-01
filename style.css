@@ -761,27 +761,55 @@ body {
    -------------------------------------------------------------------------- */
 @media (max-width: 520px) {
   body {
-    padding: calc(14px + env(safe-area-inset-top, 0px)) calc(10px + env(safe-area-inset-right, 0px)) calc(18px + env(safe-area-inset-bottom, 0px)) calc(10px + env(safe-area-inset-left, 0px));
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
     min-height: 100dvh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    background: var(--card-bg-start);
   }
 
-  /* Card wrapper maintains its elegant card framing on mobile (identical to desktop) */
-  .card-wrapper {
+  .page-container {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
     max-width: 100%;
-    border-radius: 18px;
-    padding: 20px 14px 24px 14px;
-    box-shadow: 
-      0 14px 38px -8px rgba(110, 40, 25, 0.2),
-      0 4px 14px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(225, 205, 195, 0.55);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  /* Card wrapper fills the entire viewport height on mobile (no gaps on top/bottom) */
+  .card-wrapper {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    padding: calc(14px + env(safe-area-inset-top, 0px)) 16px calc(14px + env(safe-area-inset-bottom, 0px)) 16px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Proportional vertical distribution to fill full mobile height */
+  .content-wrapper {
+    min-height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   /* Responsive Brand Header */
   .brand-header {
-    margin-top: 18px;
+    margin-top: clamp(8px, 1.8vh, 18px);
+    margin-bottom: 0;
   }
 
   .sheger-brand-logo {
@@ -792,13 +820,13 @@ body {
   .brand-tagline {
     font-size: 8px;
     letter-spacing: 0.14em;
-    margin-top: 10px;
+    margin-top: 8px;
   }
 
-  /* Hero Section: Significantly reduced bigger text on mobile */
+  /* Hero Section */
   .hero-section {
-    margin-top: 14px;
-    margin-bottom: 16px;
+    margin-top: clamp(8px, 1.8vh, 16px);
+    margin-bottom: clamp(10px, 2.2vh, 18px);
   }
 
   .sub-heading {
@@ -808,7 +836,7 @@ body {
 
   .main-heading {
     font-size: 24px;
-    margin: 2px 0 8px 0;
+    margin: 2px 0 6px 0;
     line-height: 1.15;
     letter-spacing: -0.02em;
   }
@@ -822,74 +850,83 @@ body {
     font-size: 8px;
   }
 
-  /* Pill Link Cards: Perfectly consistent horizontal layout matching desktop */
+  /* Pill Link Cards: Proportional height and spacing */
   .links-section {
-    gap: 10px;
-    margin-bottom: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(10px, 1.8vh, 15px);
+    margin-bottom: clamp(12px, 2.5vh, 22px);
   }
 
   .link-card {
-    padding: 7px 12px 7px 8px;
+    padding: clamp(7px, 1.2vh, 9px) 14px clamp(7px, 1.2vh, 9px) 9px;
     border-radius: 9999px;
   }
 
   .card-left-icon {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
   }
 
   .card-left-icon svg {
-    max-width: 24px;
-    max-height: 26px;
+    max-width: 25px;
+    max-height: 27px;
   }
 
   .card-text {
-    margin-left: 10px;
-    padding-left: 10px;
+    margin-left: 11px;
+    padding-left: 11px;
     min-width: 0;
   }
 
   .card-title {
-    font-size: 12.5px;
+    font-size: 13px;
     line-height: 1.25;
   }
 
   .card-desc {
-    font-size: 10px;
+    font-size: 10.5px;
     line-height: 1.2;
     margin-top: 1.5px;
   }
 
   .card-arrow {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     margin-left: 6px;
   }
 
   .card-arrow svg {
-    width: 13px;
-    height: 13px;
+    width: 14px;
+    height: 14px;
   }
 
   /* Subtle watermark art adjusted for mobile clarity */
   .card-watermark {
-    right: 48px;
+    right: 50px;
     opacity: 0.22;
   }
 
   .card-mesob-art,
   .card-skyline-art {
-    right: 36px;
+    right: 38px;
     opacity: 0.22;
   }
 
   /* Corner Food Plate scales cleanly on mobile */
   .food-plate-corner {
-    width: 98px;
-    height: 112px;
+    width: 102px;
+    height: 118px;
   }
 
   /* Social Footer */
+  .social-footer {
+    margin-top: auto;
+    margin-bottom: clamp(4px, 1vh, 10px);
+  }
+
   .divider-text {
     margin-bottom: 12px;
     gap: 10px;
@@ -900,24 +937,19 @@ body {
   }
 
   .social-icons {
-    gap: 12px;
+    gap: 13px;
   }
 
   .social-btn {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
   }
 }
 
 /* Extra Compact Devices (<= 380px: iPhone SE, Galaxy Fold, Small Android) */
 @media (max-width: 380px) {
-  body {
-    padding: calc(8px + env(safe-area-inset-top, 0px)) calc(6px + env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) calc(6px + env(safe-area-inset-left, 0px));
-  }
-
   .card-wrapper {
-    border-radius: 16px;
-    padding: 16px 10px 20px 10px;
+    padding: calc(10px + env(safe-area-inset-top, 0px)) 12px calc(12px + env(safe-area-inset-bottom, 0px)) 12px;
   }
 
   .sheger-brand-logo {
@@ -928,12 +960,12 @@ body {
   .brand-tagline {
     font-size: 7.5px;
     letter-spacing: 0.12em;
-    margin-top: 8px;
+    margin-top: 6px;
   }
 
   .hero-section {
-    margin-top: 10px;
-    margin-bottom: 13px;
+    margin-top: 8px;
+    margin-bottom: 10px;
   }
 
   .sub-heading {
@@ -942,7 +974,7 @@ body {
 
   .main-heading {
     font-size: 21px;
-    margin: 1px 0 6px 0;
+    margin: 1px 0 5px 0;
   }
 
   .pill-categories {
@@ -950,8 +982,13 @@ body {
     gap: 4px;
   }
 
+  .links-section {
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
   .link-card {
-    padding: 6px 10px 6px 6px;
+    padding: 6px 11px 6px 7px;
   }
 
   .card-left-icon {
@@ -974,32 +1011,32 @@ body {
   }
 
   .card-desc {
-    font-size: 9px;
+    font-size: 9.5px;
   }
 
   .card-arrow {
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
     margin-left: 4px;
   }
 
   .card-arrow svg {
-    width: 11px;
-    height: 11px;
+    width: 12px;
+    height: 12px;
   }
 
   .food-plate-corner {
-    width: 78px;
-    height: 90px;
+    width: 82px;
+    height: 95px;
   }
 
   .social-btn {
-    width: 29px;
-    height: 29px;
+    width: 30px;
+    height: 30px;
   }
 
   .social-icons {
-    gap: 9px;
+    gap: 10px;
   }
 }
 
@@ -1295,17 +1332,13 @@ body {
 
 @media (max-width: 520px) {
   [data-theme="dark"] body {
-    background-color: #08070A;
-    background-image: radial-gradient(circle at 50% 25%, #240c0f 0%, #0c090c 60%, #050406 100%);
+    background: #560908;
   }
 
   [data-theme="dark"] .card-wrapper {
     background-color: #560908;
     background-image: linear-gradient(180deg, #5e0b0a 0%, #560908 50%, #4c0706 100%);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    box-shadow: 
-      0 18px 50px -10px rgba(0, 0, 0, 0.85),
-      0 0 35px -8px rgba(86, 9, 8, 0.45),
-      inset 0 1px 1px rgba(255, 255, 255, 0.16);
+    border: none;
+    box-shadow: none;
   }
 }
