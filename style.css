@@ -914,16 +914,34 @@ body {
     height: 14px;
   }
 
-  /* Subtle watermark art adjusted for mobile clarity */
-  .card-watermark {
-    right: 50px;
-    opacity: 0.22;
-  }
-
+  /* Card Background Artworks */
   .card-mesob-art,
   .card-skyline-art {
     right: 38px;
     opacity: 0.22;
+  }
+
+  /* In light mode on mobile, keep Android Play emblem & iOS App Store badge bright white like desktop */
+  .play-watermark {
+    right: 48px;
+    opacity: 0.92;
+  }
+
+  .play-watermark path {
+    fill: #ffffff !important;
+  }
+
+  .appstore-watermark {
+    right: 48px;
+    opacity: 0.95;
+  }
+
+  .appstore-watermark .appstore-bg {
+    fill: #ffffff !important;
+  }
+
+  .appstore-watermark .appstore-stroke {
+    fill: #8F0F0D !important;
   }
 
   /* Corner Food Plate scales cleanly on mobile */
