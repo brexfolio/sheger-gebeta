@@ -823,10 +823,10 @@ body {
     margin-top: 8px;
   }
 
-  /* Hero Section */
+  /* Hero Section (Pushed down with comfortable spacing on mobile) */
   .hero-section {
-    margin-top: clamp(8px, 1.8vh, 16px);
-    margin-bottom: clamp(10px, 2.2vh, 18px);
+    margin-top: clamp(18px, 3.2vh, 28px);
+    margin-bottom: clamp(12px, 2.4vh, 20px);
   }
 
   .sub-heading {
@@ -836,7 +836,7 @@ body {
 
   .main-heading {
     font-size: 24px;
-    margin: 2px 0 6px 0;
+    margin: 3px 0 8px 0;
     line-height: 1.15;
     letter-spacing: -0.02em;
   }
@@ -964,8 +964,8 @@ body {
   }
 
   .hero-section {
-    margin-top: 8px;
-    margin-bottom: 10px;
+    margin-top: 14px;
+    margin-bottom: 12px;
   }
 
   .sub-heading {
@@ -974,7 +974,7 @@ body {
 
   .main-heading {
     font-size: 21px;
-    margin: 1px 0 5px 0;
+    margin: 2px 0 6px 0;
   }
 
   .pill-categories {
