@@ -20,9 +20,19 @@
     rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
+  <script>
+    (function () {
+      var saved = localStorage.getItem('sheger_theme');
+      if (saved === 'light') {
+        document.documentElement.removeAttribute('data-theme');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
 </head>
 
-<body>
+<body class="preload-transitions">
 
   <main class="page-container">
     <!-- Mobile App Container Card -->
@@ -987,6 +997,15 @@
     (function () {
       const celestialToggle = document.getElementById('celestialToggle');
 
+      // Unblock transitions after initial render so entrance animations play cleanly without theme transition flicker
+      window.addEventListener('DOMContentLoaded', function () {
+        requestAnimationFrame(function () {
+          setTimeout(function () {
+            document.body.classList.remove('preload-transitions');
+          }, 50);
+        });
+      });
+
       function setTheme(theme) {
         const favicon = document.getElementById('appFavicon');
         if (theme === 'dark') {
@@ -1013,7 +1032,7 @@
         setTheme(isDark ? 'light' : 'dark');
       }
 
-      // Initialize theme
+      // Sync initial theme
       const savedTheme = localStorage.getItem('sheger_theme');
       if (savedTheme === 'light') {
         setTheme('light');
