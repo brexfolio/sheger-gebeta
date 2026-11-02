@@ -42,7 +42,6 @@
 }
 
 html {
-  height: 100%;
   overflow-x: hidden;
   width: 100%;
   background-color: var(--bg-page);
@@ -60,26 +59,16 @@ body {
   color: var(--primary-maroon);
   min-height: 100vh;
   min-height: 100dvh;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(8px, 1.8vh, 20px) 16px;
+  padding: 24px 16px 36px 16px;
   line-height: 1.4;
   overflow-x: hidden;
   width: 100%;
-  box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.4s ease, background-image 0.4s ease, color 0.4s ease;
-}
-
-#__nuxt {
-  width: 100%;
-  min-height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* Outer Page Container */
@@ -1013,111 +1002,6 @@ html.in-view-transition *::after {
 
 .bottom-pattern svg {
   display: block;
-}
-
-/* --------------------------------------------------------------------------
-   Laptop & Desktop Viewport Fitting (No Scrolling on Laptop)
-   -------------------------------------------------------------------------- */
-@media (min-width: 521px) {
-  html,
-  body {
-    height: 100%;
-    overflow: hidden;
-  }
-
-  #__nuxt {
-    height: 100%;
-  }
-
-  .page-container {
-    max-height: 100%;
-    align-items: center;
-  }
-}
-
-/* Laptop height optimization (600px - 850px) to ensure zero scrolling */
-@media (min-width: 521px) and (max-height: 850px) {
-  body {
-    padding: clamp(4px, 1vh, 12px) 16px;
-  }
-
-  .card-wrapper {
-    padding: clamp(14px, 1.8vh, 18px) 20px clamp(16px, 2vh, 22px) 20px;
-  }
-
-  .brand-header {
-    margin-top: clamp(14px, 2.2vh, 24px);
-  }
-
-  .sheger-brand-logo {
-    height: clamp(38px, 5.2vh, 44px);
-  }
-
-  .brand-tagline {
-    margin-top: clamp(5px, 0.9vh, 9px);
-  }
-
-  .hero-section {
-    margin-top: clamp(10px, 1.5vh, 16px);
-    margin-bottom: clamp(10px, 1.6vh, 16px);
-  }
-
-  .sub-heading {
-    font-size: clamp(14px, 1.8vh, 16px);
-  }
-
-  .main-heading {
-    font-size: clamp(26px, 3.6vh, 32px);
-    margin: 2px 0 6px 0;
-  }
-
-  .pill-categories {
-    font-size: clamp(11px, 1.4vh, 12px);
-  }
-
-  .links-section {
-    gap: clamp(7px, 1.1vh, 11px);
-    margin-bottom: clamp(10px, 1.5vh, 18px);
-  }
-
-  .link-card {
-    padding: clamp(8px, 1.2vh, 11px) 14px;
-  }
-
-  .card-left-icon {
-    width: clamp(40px, 5vh, 46px);
-    height: clamp(40px, 5vh, 46px);
-  }
-
-  .card-title {
-    font-size: clamp(13px, 1.7vh, 15px);
-  }
-
-  .card-desc {
-    font-size: clamp(10.5px, 1.3vh, 12px);
-  }
-
-  .social-footer {
-    margin-top: 0;
-  }
-
-  .footer-social-links {
-    margin-top: clamp(8px, 1.2vh, 12px);
-  }
-
-  .social-btn {
-    width: clamp(30px, 3.8vh, 34px);
-    height: clamp(30px, 3.8vh, 34px);
-  }
-}
-
-/* Fallback for ultra-small height windows (below 540px) */
-@media (min-width: 521px) and (max-height: 540px) {
-  html,
-  body {
-    overflow-y: auto !important;
-    height: auto;
-  }
 }
 
 /* --------------------------------------------------------------------------
