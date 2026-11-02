@@ -9,9 +9,9 @@
     content="Discover Addis together. Explore food reviews, cafes, dining, and top places in Addis Ababa with Sheger Gebeta.">
 
   <!-- Favicon (Adaptive SVG: Maroon in Light Mode, White in Dark Mode) -->
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" id="appFavicon">
-  <link rel="alternate icon" type="image/png" href="crop_logo_mark.png">
-  <link rel="apple-touch-icon" href="crop_logo_mark.png">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" id="appFavicon">
+  <link rel="alternate icon" type="image/png" href="assets/crop_logo_mark.png">
+  <link rel="apple-touch-icon" href="assets/crop_logo_mark.png">
 
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1012,13 +1012,13 @@
           document.documentElement.setAttribute('data-theme', 'dark');
           document.body.setAttribute('data-theme', 'dark');
           if (celestialToggle) celestialToggle.setAttribute('aria-label', 'Switch to Light Mode');
-          if (favicon) favicon.href = 'favicon-dark.svg';
+          if (favicon) favicon.href = 'assets/favicon-dark.svg';
           localStorage.setItem('sheger_theme', 'dark');
         } else {
           document.documentElement.removeAttribute('data-theme');
           document.body.removeAttribute('data-theme');
           if (celestialToggle) celestialToggle.setAttribute('aria-label', 'Switch to Dark Mode');
-          if (favicon) favicon.href = 'favicon-light.svg';
+          if (favicon) favicon.href = 'assets/favicon-light.svg';
           localStorage.setItem('sheger_theme', 'light');
         }
       }
