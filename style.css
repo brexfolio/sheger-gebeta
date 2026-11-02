@@ -44,6 +44,12 @@
 html {
   overflow-x: hidden;
   width: 100%;
+  background-color: var(--bg-page);
+}
+
+[data-theme="dark"] html,
+html[data-theme="dark"] {
+  background-color: #08070A;
 }
 
 body {
@@ -153,6 +159,59 @@ body.preload-transitions *::after {
   100% {
     filter: drop-shadow(0 0 12px rgba(232, 142, 139, 0.75));
   }
+}
+
+/* ==========================================================================
+   Circular Ripple / Mask View Transition (Sun ⇄ Moon)
+   Reveals dark or light mode starting from the celestial toggle icon
+   ========================================================================== */
+::view-transition-group(root) {
+  animation-duration: 0.85s;
+  animation-timing-function: cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+  display: block;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+  animation: circleReveal 0.85s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+}
+
+@keyframes circleReveal {
+  from {
+    clip-path: circle(0px at var(--reveal-x, 80%) var(--reveal-y, 40px));
+  }
+  to {
+    clip-path: circle(var(--reveal-radius, 150vmax) at var(--reveal-x, 80%) var(--reveal-y, 40px));
+  }
+}
+
+/* Temporary class during theme snapshot to ensure instant capture */
+html.in-view-transition,
+html.in-view-transition *,
+html.in-view-transition *::before,
+html.in-view-transition *::after {
+  transition: none !important;
+}
+
+/* Fallback circular ripple for browsers without native View Transitions */
+.theme-circle-ripple {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999999;
+  transform: translate(-50%, -50%) scale(1);
+  will-change: transform, opacity;
+  transition: transform 0.85s cubic-bezier(0.25, 1, 0.3, 1), opacity 0.35s ease;
 }
 
 /* Mobile Application Card */

@@ -1023,13 +1023,130 @@
         }
       }
 
+      let isThemeTransitioning = false;
+
+      function runFallbackCircleTransition(x, y, endRadius, targetTheme, onComplete) {
+        const ripple = document.createElement('div');
+        ripple.className = 'theme-circle-ripple';
+        ripple.style.position = 'fixed';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.style.width = '12px';
+        ripple.style.height = '12px';
+        ripple.style.borderRadius = '50%';
+        ripple.style.pointerEvents = 'none';
+        ripple.style.zIndex = '999999';
+        ripple.style.transform = 'translate(-50%, -50%) scale(1)';
+        ripple.style.backgroundColor = targetTheme === 'dark' ? '#08070A' : '#f0ebe4';
+        ripple.style.boxShadow = targetTheme === 'dark'
+          ? '0 0 50px 25px rgba(86, 9, 8, 0.7), inset 0 0 25px rgba(0, 0, 0, 0.8)'
+          : '0 0 50px 25px rgba(248, 244, 236, 0.85), inset 0 0 25px rgba(255, 255, 255, 0.9)';
+        ripple.style.transition = 'transform 0.85s cubic-bezier(0.25, 1, 0.3, 1), opacity 0.35s ease';
+
+        document.body.appendChild(ripple);
+
+        const targetScale = (endRadius / 6) * 1.08;
+
+        requestAnimationFrame(function () {
+          ripple.style.transform = 'translate(-50%, -50%) scale(' + targetScale + ')';
+        });
+
+        setTimeout(function () {
+          setTheme(targetTheme);
+        }, 480);
+
+        setTimeout(function () {
+          ripple.style.opacity = '0';
+          setTimeout(function () {
+            ripple.remove();
+            if (onComplete) onComplete();
+          }, 350);
+        }, 850);
+      }
+
       function toggleTheme(e) {
         if (e) {
           e.preventDefault();
           e.stopPropagation();
         }
+        if (isThemeTransitioning) return;
+        isThemeTransitioning = true;
+
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark' || document.body.getAttribute('data-theme') === 'dark';
-        setTheme(isDark ? 'light' : 'dark');
+        const nextTheme = isDark ? 'light' : 'dark';
+
+        // Calculate origin center of the celestial sun/moon button
+        let x = window.innerWidth / 2;
+        let y = window.innerHeight / 2;
+        if (celestialToggle) {
+          const rect = celestialToggle.getBoundingClientRect();
+          x = rect.left + rect.width / 2;
+          y = rect.top + rect.height / 2;
+        }
+
+        // Radius needed to reach the farthest corner of the viewport
+        const endRadius = Math.ceil(Math.hypot(
+          Math.max(x, window.innerWidth - x),
+          Math.max(y, window.innerHeight - y)
+        )) + 20;
+
+        const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // If reduced motion is requested, switch immediately without animation
+        if (prefersReducedMotion) {
+          setTheme(nextTheme);
+          isThemeTransitioning = false;
+          return;
+        }
+
+        // If startViewTransition is unsupported, use the smooth circular expanding ripple fallback
+        if (!document.startViewTransition) {
+          runFallbackCircleTransition(x, y, endRadius, nextTheme, function () {
+            isThemeTransitioning = false;
+          });
+          return;
+        }
+
+        // Set CSS variables for View Transition clip-path
+        document.documentElement.style.setProperty('--reveal-x', x + 'px');
+        document.documentElement.style.setProperty('--reveal-y', y + 'px');
+        document.documentElement.style.setProperty('--reveal-radius', endRadius + 'px');
+
+        // Disable intra-element CSS transitions during snapshot capture so the new theme is crisp
+        document.documentElement.classList.add('in-view-transition');
+
+        const transition = document.startViewTransition(function () {
+          setTheme(nextTheme);
+        });
+
+        transition.ready.then(function () {
+          document.documentElement.classList.remove('in-view-transition');
+
+          const clipPath = [
+            'circle(0px at ' + x + 'px ' + y + 'px)',
+            'circle(' + endRadius + 'px at ' + x + 'px ' + y + 'px)'
+          ];
+
+          try {
+            document.documentElement.animate(
+              { clipPath: clipPath },
+              {
+                duration: 850,
+                easing: 'cubic-bezier(0.25, 1, 0.3, 1)',
+                pseudoElement: '::view-transition-new(root)'
+              }
+            );
+          } catch (err) {
+            // CSS @keyframes circleReveal provides the animation if animate() pseudoElement is unsupported
+          }
+        }).catch(function () {
+          document.documentElement.classList.remove('in-view-transition');
+        });
+
+        transition.finished.finally(function () {
+          document.documentElement.classList.remove('in-view-transition');
+          isThemeTransitioning = false;
+        });
       }
 
       // Sync initial theme
